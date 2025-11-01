@@ -18,7 +18,8 @@ def fibonacci(prev1, prev2):
     else:
         return
 
-fibonacci(1,0)
+fibonacci(1,0) # 1 is prev1, 0 is prev2; prev1 is immediately before newFibo in sequence & prev2 is before prev1 i.e. we are going backwards
+# for eg. 0 = prev2, 1 = prev1, 1 = newFibo
 
 #Python
 
@@ -45,3 +46,8 @@ output:
 2584
 4181 
 '''
+'''
+time space complexity:
+ Time Complexity: O(n)
+ Space Complexity: O(n) (because of the recursive call stack)
+ '''

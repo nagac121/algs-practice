@@ -19,26 +19,29 @@ function fibonacci(prev1, prev2) {
   }
 }
 
-fibonacci(1, 0);
+fibonacci(1, 0); // 1 is prev1, 0 is prev2; prev1 is immediately before newFibo in sequence & prev2 is before prev1 i.e. we are going backwards
+// for eg. 0 = prev2, 1 = prev1, 1 = newFibo
 
-// Output:
-// 0
-// 1
-// 1
-// 2
-// 3
-// 5
-// 8
-// 13
-// 21
-// 34
-// 55
-// 89
-// 144
-// 233
-// 377
-// 610
-// 987
-// 1597
-// 2584
-// 4181
+/**
+Output:
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+987
+1597
+2584
+4181
+ */
