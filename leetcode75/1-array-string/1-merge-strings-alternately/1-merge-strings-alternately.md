@@ -3,7 +3,8 @@ leetcode no: 1768
 name: Merge Strings Alternately
 from: leetcode75
 difficulty: easy
-solution: JS version of Approach 1 (Python → JS conversion by GitHub Copilot)
+py solution: leetcode editorial
+js solution: Python → JS conversion by GitHub Copilot
 
 - Description:
 - You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string.
@@ -43,3 +44,24 @@ Constraints:
 
 alg:
 The idea is simple, we create a result string. We one by one append characters of both given strings in alternate style.
+
+## APPROACH 1 VS APPROACH 2
+
+Between the two, approach 1 (the version with the while loop and two pointers) is better to
+present in an interview.
+
+Reasons:
+It clearly shows the intent to alternate between the two strings, handling different lengths
+naturally.
+The use of two pointers (i and j) is a common and clear pattern for merging or
+traversing two sequences.
+
+It is more flexible and generalizes well to similar problems.
+Many interviewers expect to see the two-pointer pattern for merging tasks.
+
+Approach 2 (the for loop with max(len(word1), len(word2))) is also correct and clean,
+but approach 1 is more idiomatic for merge problems and demonstrates a classic algorithmic technique.
+
+Summary:
+Present the code with the while loop and two pointers (approach 1) in interviews for best clarity
+and alignment with standard practices.
