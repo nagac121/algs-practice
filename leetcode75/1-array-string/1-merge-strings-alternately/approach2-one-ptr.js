@@ -1,8 +1,5 @@
 /**
- * https://leetcode.com/problems/merge-strings-alternately/description/?envType=study-plan-v2&envId=leetcode-75
- * 1768. Merge Strings Alternately
- * leetcode75
- * easy
+ * solution: leetcode Editorial
  * JS version of Approach 2 (Python → JS conversion by GitHub Copilot)
  */
 class Solution {

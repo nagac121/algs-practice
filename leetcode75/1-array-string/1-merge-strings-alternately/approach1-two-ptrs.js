@@ -1,3 +1,6 @@
+/**
+ * JS version of Approach 2 (Python → JS conversion by GitHub Copilot)
+ */
 function mergeAlternately(word1, word2) {
   const m = word1.length;
   const n = word2.length;

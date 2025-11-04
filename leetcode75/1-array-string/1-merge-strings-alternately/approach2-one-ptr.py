@@ -1,5 +1,6 @@
-# https://leetcode.com/problems/merge-strings-alternately
-
+'''
+solution: leetcode Editorial
+'''
 class Solution(object):
     def mergeAlternately(self, word1, word2):
         result = []
