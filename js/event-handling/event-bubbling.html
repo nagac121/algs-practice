@@ -1,0 +1,47 @@
+<!--
+Interview question: 
+company: accenture
+date: 24-9-25
+topic: event bubbling
+-->
+<html>
+  <head>
+    <title>Event Bubbling Example</title>
+    <div id="parent">
+      <button id="child">Click Me</button>
+    </div>
+  </head>
+  <body>
+    <script>
+      // event bubbling example
+      document.getElementById("parent").addEventListener("click", () => {
+        console.log("Parent clicked");
+      });
+      document.getElementById("child").addEventListener("click", () => {
+        console.log("Child clicked");
+      });
+    </script>
+    <!--
+    output: child clicked
+            parent clicked
+
+When you click the button, both "Child clicked" and "Parent clicked" will be logged to the console. This demonstrates event bubbling, where the event propagates from the child element (button) to the parent element (div).   
+To stop the event from bubbling up to the parent, you can use `event.stopPropagation()` in the child's event listener:
+-->
+    <script>
+      // Updated child event listener to stop propagation
+      document.getElementById("child").addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevents the event from bubbling up
+        console.log("Child clicked");
+      });
+    </script>
+    <!--
+    output: child clicked
+    
+Now, when you click the button, only "Child clicked" will be logged, and "Parent clicked" will not be logged. 
+This shows how to control event propagation in the DOM. 
+Instead of argument event, you can also use e or any other name. like (e) or (evt)
+also we can use event.cancelBubble = true; to stop propagation but event.stopPropagation() is preferred.
+-->
+  </body>
+</html>

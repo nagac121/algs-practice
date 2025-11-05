@@ -1,0 +1,39 @@
+<!-- 
+ Event Delegation Example
+-->
+<Doctype html>
+  <html>
+    <head>
+      <title>Event Delegation Example</title>
+    </head>
+    <body>
+      <div>Click on any item:</div>
+      <ul id="list">
+        <li data-id="1">Item 1</li>
+        <li data-id="2">Item 2</li>
+        <li data-id="3">Item 3</li>
+      </ul>
+
+      <script>
+        const list = document.getElementById("list");
+
+        // Attach a single click listener to the parent
+        list.addEventListener("click", (event) => {
+          if (event.target.tagName === "LI") {
+            console.log("Clicked item id:", event.target.dataset.id);
+          }
+        });
+      </script>
+    </body>
+  </html>
+  <!--
+output: Clicked item id: 1
+        Clicked item id: 2
+        Clicked item id: 3
+
+When you click on any list item, its data-id will be logged to the console. This demonstrates event delegation, where a single event listener on the parent element handles events for its child elements.  
+This approach is efficient as it reduces the number of event listeners in the DOM, especially useful for lists with many items or dynamically added items.
+
+data-id is a custom attribute used to store extra information about an element. In this case, it uniquely identifies each list item.
+-->
+</Doctype>

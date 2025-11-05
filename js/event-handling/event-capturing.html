@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>Event Capturing Example</title>
+  </head>
+  <body>
+    <div id="parent" style="padding: 20px; border: 1px solid black">
+      Parent
+      <button id="child">Click Me</button>
+    </div>
+
+    <script>
+      const parent = document.getElementById("parent");
+      const child = document.getElementById("child");
+
+      // Parent event listener with capturing enabled
+      parent.addEventListener(
+        "click",
+        () => {
+          console.log("Parent clicked (capturing)");
+        },
+        { capture: true } // capturing phase
+      );
+
+      // Child event listener (default bubbling)
+      child.addEventListener("click", () => {
+        console.log("Child clicked (bubbling)");
+      });
+    </script>
+  </body>
+</html>
+<!--
+output: Parent clicked (capturing)
+        Child clicked (bubbling)
+
+When you click the button, "Parent clicked (capturing)" will be logged first, followed by "Child clicked (bubbling)". This demonstrates event capturing, where the event is first captured by the parent element before reaching the child element. 
+To stop the event from propagating further, you can use `event.stopPropagation()` in either event listener:
+
+Once bubbling is done, capturing phase is not executed again. Capturing happens first, then target phase, then bubbling phase.
+-->
