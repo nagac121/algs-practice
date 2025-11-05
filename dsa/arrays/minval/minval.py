@@ -5,10 +5,13 @@ my_array = [7, 12, 9, 4, 11]
 minVal = my_array[0]
 
 for i in my_array:
-    print('Current value:',i)
+    # print('Current value:',i)
     if i < minVal:
         minVal = i
 
 print('Lowest value:',minVal)
 
-#Python
+''' 
+time complexity: O(n)
+space complexity: O(1)
+'''
