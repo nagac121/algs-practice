@@ -14,4 +14,7 @@ for (const i of myArray) {
 
 console.log("Lowest value:", minVal);
 
-// JavaScript
+/**
+ time complexity: O(n)
+ space complexity: O(1)
+ */
