@@ -2,9 +2,9 @@
 
 ## Details
 
-https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150
-leetocode pb no: 26
-top interview 150
+https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/?envType=study-plan-v2&envId=top-interview-150  
+leetocode pb no: 26  
+Top interview 150
 
 ## Description
 
@@ -49,3 +49,14 @@ Constraints:
     1 <= nums.length <= 3 * 104
     -100 <= nums[i] <= 100
     nums is sorted in non-decreasing order.
+
+## 2-Expected approach
+
+> Since the array is sorted, we do not need to maintain a hash set. All occurrences of an element would be consecutive. So we mainly need to check if the current element is same as the previous element or not.
+
+### Step by step implementation:
+
+- Start with idx = 1 (idx is going to hold the index of the next distinct item. Since there is nothing before the first item, we consider it as the first distinct item and begin idx with 1.
+- Loop through the array for i = 0 to n-1.
+  - At each index i, if arr[i] is different from arr[i-1], assign arr[idx] = arr[i] and increment idx.
+- After the loop, arr[] contains the unique elements in the first idx positions.
