@@ -1,7 +1,7 @@
 function deepCopy(obj) {
   if (obj === null || typeof obj !== "object") return obj;
 
-  let copy = Array.isArray(obj) ? [] : {};
+  let copy = Array.isArray(obj) ? [] : {}; // array is also object type
 
   for (let key in obj) {
     if (obj.hasOwnProperty(key)) {
