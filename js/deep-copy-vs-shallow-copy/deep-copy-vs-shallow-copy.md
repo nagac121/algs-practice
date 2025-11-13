@@ -70,6 +70,36 @@ function deepCopy(obj) {
 ✅ Works for nested objects and arrays
 ❌ Doesn’t handle circular references (advanced follow-up question)
 
+#### QA
+
+🧠 1️⃣ Why do we check obj.hasOwnProperty(key)?
+
+You’re right that in most practical cases, especially when you wrote the object yourself (not inherited from a prototype), all keys you get in a for...in loop will belong to the object itself.
+
+However:
+
+for...in loops through both own and inherited enumerable properties.
+
+Example:
+
+```js
+const parent = { shared: 123 };
+const child = Object.create(parent);
+child.name = "ICE";
+
+for (let key in child) {
+  console.log(key); // name, shared
+}
+```
+
+🔹 shared is not defined inside child — it comes from its prototype.
+🔹 child.hasOwnProperty('shared') → false.
+
+So, hasOwnProperty ensures you don’t accidentally copy prototype chain properties (which could lead to unexpected behavior or infinite recursion).
+
+If you are 100% sure your input has no prototype pollution or custom prototypes, you can safely omit it.
+But adding it is considered a defensive, safe coding practice — especially in interview code.
+
 ---
 
 **3️⃣ Using `structuredClone()` (modern JS feature)**
@@ -102,4 +132,124 @@ const deepCopy = structuredClone(obj);
 
 ---
 
-Would you like me to show you **how to implement a deep clone that handles circular references**, the version senior UI interviews usually expect?
+Excellent question 👏 — this shows you’re thinking like a **senior engineer**, not just coding blindly.
+
+Let’s go step-by-step.
+
+---
+
+---
+
+# Let’s Dry Run It
+
+We’ll use this example:
+
+```js
+const person = {
+  name: "John",
+  address: {
+    city: "Hyderabad",
+    pin: 500001,
+  },
+  skills: ["JS", "React"],
+};
+```
+
+Now we call:
+
+```js
+const clone = deepCopy(person);
+```
+
+---
+
+### Step 1: `deepCopy(person)`
+
+- `person` is an object → not null → proceed.
+- Create `copy = {}`.
+
+Iterate over keys: `name`, `address`, `skills`.
+
+---
+
+### ➤ Key = "name"
+
+`obj.name` = `"John"` → a primitive.
+→ `deepCopy("John")` returns `"John"` immediately.
+`copy.name = "John"`.
+
+---
+
+### ➤ Key = "address"`
+
+`obj.address` = `{ city: "Hyderabad", pin: 500001 }`
+→ an object → recursive call.
+
+#### 🌀 Call: `deepCopy({ city: "Hyderabad", pin: 500001 })`
+
+- Create `copy = {}`.
+- Keys: `city`, `pin`.
+
+→ For `"city"` → `"Hyderabad"` (primitive) → copied.
+→ For `"pin"` → `500001` (primitive) → copied.
+
+Returns `{ city: "Hyderabad", pin: 500001 }`.
+
+Now back in the parent:
+`copy.address = { city: "Hyderabad", pin: 500001 }`.
+
+---
+
+### ➤ Key = "skills"`
+
+`obj.skills` = `["JS", "React"]` → Array → recursive call.
+
+#### 🌀 Call: `deepCopy(["JS", "React"])`
+
+- `Array.isArray(obj)` → true → `copy = []`.
+- Iterate indices `0`, `1`.
+
+→ For `0`: `"JS"` (primitive) → copied.
+→ For `1`: `"React"` (primitive) → copied.
+
+Returns `["JS", "React"]`.
+
+Now back in parent:
+`copy.skills = ["JS", "React"]`.
+
+---
+
+✅ Final return:
+
+```js
+{
+  name: "John",
+  address: { city: "Hyderabad", pin: 500001 },
+  skills: ["JS", "React"]
+}
+```
+
+---
+
+### ✅ Verification:
+
+```js
+clone.address.city = "Chennai";
+console.log(person.address.city); // still "Hyderabad" ✅
+```
+
+That’s the sign of a **true deep copy** (no shared references).
+
+---
+
+## 🔍 Summary
+
+| Step                      | Purpose                           |
+| ------------------------- | --------------------------------- |
+| `typeof obj !== "object"` | Stops recursion on primitives     |
+| `Array.isArray(obj)`      | Keeps type (array vs object)      |
+| `for...in`                | Loops through all enumerable keys |
+| `hasOwnProperty()`        | Avoids prototype pollution        |
+| Recursive call            | Clones nested levels              |
+
+---
